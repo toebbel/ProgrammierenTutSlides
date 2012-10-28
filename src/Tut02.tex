@@ -1,0 +1,658 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+\section{Datentypen}
+\subsection{primitiv vs. Referenz}
+
+\begin{frame}
+	\frametitle{Primitive und nicht primitive}
+	
+	\begin{itemize}
+		\item<1-> In Java gibt es 8 primitive Datentypen. Der Rest sind Klassen.
+		\item<2-> Primitive Datentypen brauchen kein \emph{new} bei 'Objekterzeugung'.
+		\item<3-> Primitive Datentypen $\neq$ ungleich Klassen/Objekt
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{Primitive Datentypen}
+	\textbf{Wir brauchen (fast) nur diese primitiven Datentypen:}
+	\begin{itemize}
+		\item int
+		\item boolean
+		\item char
+		\item double
+	\end{itemize}
+	
+	\pause
+	Und was ist mit String?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{String}
+	
+	String ist kein primitiver Datentyp!
+	Trotzdem braucht man kein \emph{new}.
+	
+	\begin{lstlisting}[language=java]
+		String myVar = "Hallo";		//String mit Inhalt
+		String myVar2 = new String(); 	//leerer String
+		String myVar3 = ""; 			//auch leerer String
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Umgang mit primitven Datentypen}
+\begin{frame}[fragile]
+	\frametitle{String}
+	
+	String ist kein primitiver Datentyp!
+	Trotzdem kann man "rechnen"
+	
+	\begin{lstlisting}[language=java]
+		String myVar = "Hallo";		
+		String myVar2 = "Welt"; 
+		
+		//Verknuepfen von Strings
+		String result1 = myVar + " " + myVar2;
+		String result2 = myVar2 + "+" + myVar2;
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{String und Escape-Zeichen}
+	
+	String mit Inhalt \emph{Hallo ''Welt''}.
+	\begin{lstlisting}[language=java]
+		String = "Hallo \"Welt\"";
+	\end{lstlisting}
+	\pause
+	
+	
+	String mit Zeilenumbruch in der Mitte.
+	\begin{lstlisting}[language=java]
+		String = "Hallo \n Welt";
+	\end{lstlisting}
+	\pause
+	
+	
+	String mit Inhalt \emph{Hallo \textbackslash Welt}.
+	\begin{lstlisting}[language=java]
+		String = "Hallo \\Welt";
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{Char}
+	
+	Immer in einfachen Anführungszeichen
+	\begin{lstlisting}[language=java]
+		char einA = 'A';
+		char NochEinA = 65;
+	\end{lstlisting}
+	Was passiert bei 
+	\begin{lstlisting}[language=java]
+	einA + NochEinA
+	\end{lstlisting}	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{Double / Float}
+	
+	\textbf{double}
+	Kein , sondern . verwenden! Für Floats immer ein \emph{f} anhängen.
+	\begin{lstlisting}[language=java]
+		double myDouble = 123.456;
+		float myFloat = 9.81f;
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{Zahlendarstellungen}
+	
+	Man kann Zahlen unterschiedlich darstellen:
+	\begin{lstlisting}[language=java]
+		int a = 18; //Dezimal
+		int a = 022; //Oktal
+		int a = 0x12; //Hexadezimal
+	\end{lstlisting}
+	alle Zeilen bedeuten das selbe!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Welcher Datentyp für was?}
+\begin{frame}[fragile]
+	\frametitle{Übersicht Datentypen}
+	\begin{tabular}[ht]{|l|l|l|}
+		\hline
+		\textbf{Typ}&	\textbf{Erklärung}		&	\textbf{Beispiel-Werte}								 \\
+		\hline
+		boolean 	&	Wahrheitswerte 			&	$true$, $false$										 \\
+		char 		&	16-Bit-Unicode-Zeichen 	&	$’A’$, ’\textbackslash $n$', ’\textbackslash $u05D0$’	 \\
+		byte 		&	8-Bit-Ganzzahl			& 	$12$												 \\
+		short 		&	16-Bit-Ganzzahl 		&	$12$												 \\
+		int 		&	32-Bit-Ganzzahl			& 	$12$												 \\
+		long 		&	64-Bit-Ganzzahl			& 	$12L$, $14l$										 \\
+		float 		&	32-Bit-Gleitpunktzahlen &	$9.81F$, $0.379E-8F$, $2f$							 \\
+		double 		&	64-Bit-Gleitpunktzahlen &	$9.81$, $0.379E-8$, $3e1$								 \\
+		\hline
+	\end{tabular}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+	\frametitle{Wertebereiche}
+	\begin{tabular}[ht]{|l|l|l|}
+		\hline
+		\textbf{Typ}	&	\textbf{kleinster Wert}			&	\textbf{größter Wert} 			\\
+		\hline
+		char 			&	\textbackslash u0000 (0)		&	\textbackslash uFFFF (65.535)	\\
+		byte 			&	$-128$							&	$127$								\\
+		short 			&	$-32.768$						&	$32.767$							\\
+		int				&	$-2.147.483.648$				&	$2.147.483.647$					\\
+		long 			&	$-9.223.372.036.854.775.808$	&	$9.223.372.036.854.775.807$		\\
+		float			&	$-3.4028235*10^{38}$				&	$3.4028235*10^{38}$					\\
+		double 			&	$-1.7976931348623157*10^{308}$		&	$1.7976931348623157*10^{308}$		\\
+		\hline
+	\end{tabular}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Operatoren}
+\subsection{Zuweisungen}
+\begin{frame}[fragile]
+	\frametitle{Zuweisungsoperator}
+	
+	Anders als bei Mathe:
+	
+	\begin{lstlisting}[language=java]
+		int x;		//Deklarieren
+		int y = 3; 	//Deklarieren und initialisieren
+		y = y + 3; //das ist KEINE Gleichung
+		x = y;
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Zahlen}
+\begin{frame}
+	\frametitle{Was wir brauchen}
+	\framesubtitle{Operatoren für Zahlen}
+	
+	\begin{tabular}[ht]{|l|c|c|}
+		\hline
+								& \textbf{in Java}		&	\textbf{Ergebnis}	\\
+		\hline
+		Zuweisung 				& = 					&	wahr				\\ %%TODO ist das so?
+		\hline
+		add, sub, mult 			& $+$, $-$, $*$ 		&	genauster Datentyp	\\
+		\hline
+		div, mod 				& $/$, $\%$			 	&	Zahl (abhängig)		\\ %%TODO ausprobieren
+		\hline
+		Vergleich 				& $<$, $<=$, $>=$, $>$ 	&	bool'scher Wert		\\
+		\hline
+		(Un-)Gleich			 	& $==$, $!=$ 			&	bool'scher Wert		\\
+		\hline
+	\end{tabular}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{logisches und bitweises Zeug}
+\begin{frame}
+	\frametitle{Logische / Bitweise Operatoren}
+	\framesubtitle{Operanden für boolsche Werte}
+	
+	Verknüpfung von bool'schen Werten
+	
+	
+	\begin{tabular}[ht]{|l|c|}
+		\hline
+		logisches Nicht & $!$ \\
+		\hline
+		logisches Und & $\&\&$ \\
+		\hline
+		logisches Oder & $||$ \\
+		\hline
+		bitweises Nicht / Komplement & \textasciitilde \\
+		\hline
+		bitweises Oder & $|$ \\
+		\hline
+		bitweises Und & $\&$ \\
+		\hline
+		exklusives Oder & \^{} \\
+		\hline
+	\end{tabular}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Interpretationssache}
+\begin{frame}
+	\frametitle{Präzedenzen von Operatoren}
+	\begin{enumerate}
+		\item Klammerung \pause
+		\item Präzedenz	\pause
+		\item Links nach Rechts
+	\end{enumerate}
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Variabeln und Attribute}
+\subsection{Begriffe}
+\begin{frame}
+	\frametitle{Variabeln}
+	Was gehört zusammen?
+	
+	
+	\begin{columns}[c]
+		\column[c]{5cm}
+			\begin{enumerate}
+				\item Initialisieren und Deklarieren
+				\item Deklarieren
+				\item Zuweisung
+			\end{enumerate}
+		\column{5cm}
+			\begin{enumerate}
+				\item int i;
+				\item int i = 0;
+				\item i = 0;
+			\end{enumerate}
+	\end{columns}
+	
+	
+	\pause
+	$\Rightarrow$ Attribute sind Variabeln die auf Klassenebene deklariert werden.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Auf Attribute zugreifen}
+\begin{frame}[fragile]
+	\frametitle{Attributzugriff}
+	
+	\begin{lstlisting}[language=java]
+		public class Auto {
+			public String farbe;	//in Deutscher Sprache
+			public int baujahr;		//Format YYYY
+			public double gewicht; //in kg
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[language=java]
+		Auto myAuto = new Auto(); //deklarieren und initialisieren mit neuem Objekt
+		
+		myAuto.farbe = "blau";
+		myAuto.baujahr = 1985;
+		myAuto.gewicht = 987.2;
+	\end{lstlisting}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+	\frametitle{Attributzugriff}
+	Was ist hier falsch?
+	
+	
+	\begin{lstlisting}[language=java]
+		public class Auto {
+			public String farbe;	//in Deutscher Sprache
+			public int baujahr;		//Format YYYY
+			public double gewicht; //in kg
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[language=java]
+		Auto.farbe = "rot";?
+	\end{lstlisting}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Konstanten}
+\begin{frame}
+	\frametitle{Konstanten - Wozu braucht man das?}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{Konstanten - Wozu braucht man das?}
+	
+	\begin{lstlisting}[language=java]
+		public class FlaechenBerechner {
+		
+			private final double pi = 3.1415926535897932;
+		
+			public double kreisFlaeche(double radius) {
+				...
+			}
+			
+			public double kugelVolumen(double radius) {
+				...
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{Konstanten - Wozu braucht man das?}
+	
+	\begin{lstlisting}[language=java]
+		public class FileHelper {
+			private final String rootDir = "C:\\folder\\boing\\";
+			
+			public void openFile(String relPath)
+			{
+				...
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Klassen-Variabeln}
+\begin{frame}[fragile]
+	\frametitle{Klassen-Variabeln}
+	
+	\begin{lstlisting}[language=java]
+		public class Jeep {
+			public static int ANZAHLRAEDER = 4;
+			...
+		}
+	\end{lstlisting}
+\end{frame}
+	
+\begin{frame}[fragile]
+	\frametitle{Klassen-Variabeln}
+	Zugriff über:
+	\begin{lstlisting}[language=java]
+		int var = Jeep.ANZAHLRAEDER; //Zugriff wie er sein sollte
+		
+		Jeep myJeep = new Jeep(); //Objekterzeugung
+		int var2 = myJeep.ANZAHLRAEDER; //Zugriff wie er nicht sein sollte, aber geht.
+	\end{lstlisting}
+	
+	
+	Anzahl der Räder für \textbf{jeden} Jeep, auch für die, die nicht ''gebaut'' wurden.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgabenblatt}
+\subsection{Aufgabenblatt}
+\begin{frame}
+	\frametitle{Aufgabenblatt}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Referenzen auf Objekte}
+\subsection{Referenzen}
+\begin{frame}[fragile]
+	\frametitle{Referenzen - was bedeuted das?}
+	Auto.java:
+	\begin{lstlisting}[language=java]
+		public class Auto {
+			public String farbe;
+		}
+	\end{lstlisting}
+	
+	main.java:
+	\begin{lstlisting}[language=java]
+		Auto auto1 = new Auto();
+		Auto auto2 = new Auto();
+		Auto auto3 = auto1;
+		
+		auto1.farbe = "braun";
+		auto2.farbe = "gelb";
+		auto3.farbe = "blau";
+	\end{lstlisting}
+	Welches Auto hat welche Farbe?
+	
+	\pause	auto1: blau, auto2: gelb, auto3: blau.
+	
+	Warum ist das so?
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]
+	\frametitle{Referenzen - zu beachten}
+	
+	Zuweisungen von Objekten bewirkt eine Kopie der Referenz.
+	
+	
+	\begin{lstlisting}[language=java]
+		Teddybaer timmy = new Teddybaer();
+		Teddybear tilo = timmy;
+	\end{lstlisting}
+	
+	
+	Timmy und Tilo sind \textbf{ein und der selbe Teddybaer}! Es gibt eben zwei verschiedene Namen für diesen einen Bären.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Methoden}
+\subsection{Was ist eine Methode}
+\begin{frame}[fragile]
+	\frametitle{Mach mal! - die Methode}
+	
+	Wir wollen mit Objekten etwas machen. Bzw. Objekte sollen etwas machen.
+	
+	
+	\pause
+	Taschenrechner.java:
+	\begin{lstlisting}[language=java]
+		public class Taschenrechner {
+			public int addiere(int a, int b) {
+				int ergebnis = a + b;
+				return ergebnis
+			}
+		}
+	\end{lstlisting}
+	\pause
+	
+	
+	main.java:
+	\begin{lstlisting}[language=java]
+		Taschenrechner myTR = new Taschenrechner();
+		int wasIchWissenWill = myTR.addiere(1, 1);
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Methoden ohne Rückgabewert}
+\begin{frame}[fragile]
+	\frametitle{Methoden die nur nehmen}
+	Taschenrechner.java:
+	\begin{lstlisting}[language=java]
+		public class Taschenrechner {
+			int speicher;
+			
+			public void speichereZahl(int zahl) {
+				speicher = zahl;
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Übung}
+\begin{frame}[fragile]
+	\frametitle{Was ist was?}
+	Autopilot.java:
+	\begin{lstlisting}[language=java]
+		public class Autopilot {
+			
+			public void reset() {
+				//hier wird alles zurueck gesetzt
+			}
+			
+			public int getAltitude() {
+				...
+				return altitude;
+			}
+			
+			public void setDesiredAltitude(int altitude) {
+				desiredAltitude = altitude;
+			}
+		}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Konstruktoren}
+\begin{frame}[fragile]
+	\frametitle{Konstruktoren}
+	
+	Autopilot.java:
+	\begin{lstlisting}[language=java]
+		public class Autopilot {
+			private final String planeType;
+			
+			public Autopilot(String planeType) {
+				this.planeType = planeType;
+				//andere Initialisierung von anderen Variabeln
+			}
+		}
+	\end{lstlisting}
+	
+	
+	main.java:
+	\begin{lstlisting}[language=java]
+		Autopilot myAP = new Autopilot("Boing 747");
+	\end{lstlisting}
+\end{frame}
+
+\section{Zusammenfassung}
+\subsection{Was wir heute gemacht haben}
+\begin{frame}
+	\frametitle{Zusammenfassung}
+	\begin{itemize}
+		\item Primitive Datentypen
+		\item Unterschied zu Referenz-Typen
+		\item Operatoren
+		\item Attribute, Konstanten, statische Variabeln
+		\item Methoden / Konstruktoren
+	\end{itemize}
+\end{frame}
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

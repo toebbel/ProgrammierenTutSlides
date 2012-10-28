@@ -1,0 +1,465 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Übungsblatt 1}
+\subsection{Häufig gemachte Fehler}
+\begin{frame}
+	\frametitle{Häufig gemachte Fehler}
+	\textbf{Code Conventions} \pause
+		\begin{itemize}
+			\item Attribut- und Methodennamen beginnen immer klein
+			\item Klassennamen beginnen immer groß
+			\item CamelCase verwenden
+			\item Whitespaces (alias Leerzeichen / Tabs) beachten
+		\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Code-Conventions}
+\subsection{Folien vom Übungsleiter}
+\begin{frame}{Whitespaces?}
+	$\rightarrow$ Checkstyle1.pdf
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Code Conventions}
+		\begin{lstlisting}
+public class Teddy {
+	private String name;
+	private int alter;
+	private boolean istAlt;
+	
+	public Teddy(String name, int alter) {
+		if (alter > 15) {
+			istAlt = true;
+		} else {
+			istAlt = false;
+		}
+	}
+}
+		\end{lstlisting}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Code Conventions}
+		\begin{lstlisting}[showtabs=true, showspaces=true]
+public class Teddy {
+	private String name;
+	private int alter;
+	private boolean istAlt;
+
+	public Teddy(String name, int alter) {
+		if (alter > 15) {
+			istAlt = true;
+		} else {
+			istAlt = false;
+		}
+	}
+}
+		\end{lstlisting}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{so bitte nicht!}
+	
+		\emph{Profile.java}
+		\begin{lstlisting}
+public class Profile {
+	class Person {
+		String name;
+		String nachname;
+	}
+}
+		\end{lstlisting}
+		
+		Was passiert hier?
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{bitte so!}
+	
+		\emph{Profile.java}
+		\begin{lstlisting}
+public class Profile {
+	Person owner;
+}
+		\end{lstlisting}
+		
+		
+		\emph{Person.java}
+		\begin{lstlisting}
+public class Person {
+	String name;
+	String nachname;
+}
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{so bitte nicht!}
+	
+
+		\emph{Person.java}
+		\begin{lstlisting}
+public class Person {
+	String name;
+	String nachname;
+	float geburtsdatum; //z.B. 11.11.2011, hh:mm
+}
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{bitte so!}
+	
+
+		\emph{Person.java}
+		\begin{lstlisting}
+public class Person {
+	String name;
+	String nachname;
+	Timestamp geburtsdatum;
+}
+\end{lstlisting}
+
+		\emph{Timestamp.java}
+		\begin{lstlisting}
+public class Timestamp {
+	int tag;
+	int monat;
+	int jahr;
+	int stunde;
+	int minute;
+}
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{set-Methoden}
+\subsection{geheime Attribute verändern}
+\begin{frame}{Setter-Methoden}
+	\textbf{Wozu} braucht man das?
+	\pause
+	
+	Problem: Matrikelnummer-Attribut von Student-Objekt nicht mehr ändern.
+	
+	$\rightarrow$ private Attribut und get-Methode.
+	
+	
+	
+	\pause neues Problem: Wir wollen private Attribute doch ändern!
+	
+	\pause $\rightarrow$ \textbf{wtf?}
+	
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Setter-Methoden}
+		\emph{Teddy.java}
+		\begin{lstlisting}
+public class Teddy {
+	public String name;
+	public int alter; //in tagen
+	//...
+	
+	public double berechneTeddyAlter() {
+		return Math.sqrt(alter); //!!! alter muss >= 0 sein.
+	}
+}
+		\end{lstlisting}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Setter-Methoden}
+		\emph{Teddy.java}
+		\begin{lstlisting}
+public class Teddy {
+	private String name;
+	private int alter; //in tagen
+	//...
+	
+	public double berechneTeddyAlter() {
+		return Math.sqrt(alter); //!!! alter muss >= 0 sein.
+	}
+	
+	public void setAlter(int alter) {
+		this.alter = alter; //veraendert das private Attribut
+	}
+	
+	public int getAlter() {
+		return alter; //gibt das private Attribut zurueck
+	}
+}
+		\end{lstlisting}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Setter-Methoden}
+		\emph{Teddy.java}
+		\begin{lstlisting}
+	//...
+	public void setAlter(int alter) {
+		if (alter >= 0) { //pruefe den Parameter, ob gueltig
+			this.alter = alter; //veraendert das private Attribut
+		}
+	}
+	//...
+		\end{lstlisting} 
+		
+		\pause $\rightarrow$ jetzt können wir immer das Teddy-Alter berechnen :)
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Was muss ich mir merken?}
+	Für jedes Attribut, das ich \textbf{lesen} will, brauche ich eine getter-Methode
+	
+	
+	Für jedes Attribut, das ich \textbf{schreiben} will, brauche ich eine setter-Methode
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Setter-Methoden}
+		\emph{0815 - Getter-Methode}
+		\begin{lstlisting}
+	private <Datentyp> <attribut>; //deklaration des Attributs
+	//...
+	public <Datentyp> get<Attribut>() {
+		return <attribut>;
+	}
+	//...
+		\end{lstlisting} 
+		
+	\emph{0815 - Setter-Methode}
+		\begin{lstlisting}
+	//...
+	public void set<Attribut>(<Datentyp> <attribut>) {
+		this.<attribut> = <attribut>;
+	}
+	//...
+		\end{lstlisting} 
+		
+		\pause $\rightarrow$ jetzt können wir immer das Teddy-Alter berechnen :)
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Aufbau einer Klasse}
+\begin{frame}
+	\frametitle{Noch mehr Conventions ...}
+	\textbf{Aufbau einer Klasse im Quelltext}
+		\begin{enumerate}
+			\item Klassen-Kopf  \pause
+			\item Attribute / Konstanten  \pause
+			\item Konstruktor(en)  \pause
+			\item getter-/setter-Methoden  \pause
+			\item andere Methoden  \pause
+		\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Wdh: Main Methode}
+\subsection{Main Methode}
+\begin{frame}{Main-Methode}
+	\textbf{Wozu Main Methode?} \pause
+	
+	$\rightarrow$ Wird aufgerufen, wenn das Programm gestartet wird.\pause
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Main-Methode}
+	\textbf{Signatur:}
+
+	public static void main(String[] args) \{
+	
+	\begin{itemize}
+		\item public \pause $\rightarrow$ damit Methode nach außen sichtbar ist \pause
+		\item static \pause $\rightarrow$ damit kein Objekt erzeugt werden muss \pause
+		\item void \pause $\rightarrow$ weil sie nichts zurück gibt \pause
+		\item main \pause $\rightarrow$ ist festgelegt \pause
+		\item String[] \pause $\rightarrow$ weil sie mehrere String-Parameter von der Konsole bekommt.
+	\end{itemize}
+	
+	$\rightarrow$ Man braucht pro Programm genau \textbf{eine} Main-Methode!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Wdh.: if / while / for}
+\subsection{Wiederholung}
+\begin{frame}{Wiederholung if}
+	$\rightarrow$ Progr WS10 04Kontrollstrukturen.pdf slide 8 - 14
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{richtig Kommentieren}
+\subsection{richtig Kommentieren}
+\begin{frame}{richtig Kommentieren}
+	$\rightarrow$ Kommentieren.pdf
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+ \section{Übungsblatt 2}
+ \subsection{Tips}
+ \begin{frame}{Tips zum aktuellen Übungsblatt}
+ 
+	\textbf{Was muss man wissen?}
+	
+	\begin{itemize}
+		\item Methoden / Konstruktoren schreiben
+		\item Attribute schreiben und verstecken
+		\item getter-/setter-Methoden schreiben
+		\item CodeConventions / Checkstyle
+		\item statische Variablen
+		\item if-Anweisungen
+		\item eine main-Methode schreiben.
+	\end{itemize}
+ \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 
+\section{Aufgabenblatt}
+\subsection{Aufgabenblatt}
+ 
+\begin{frame}{Aufgabenblatt}
+	Jetzt seid ihr dran.
+\end{frame}
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

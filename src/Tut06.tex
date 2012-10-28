@@ -1,0 +1,529 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Übungsblatt 2}
+\subsection{Häufig gemachte Fehler}
+\begin{frame}{ÜB2 - Häufig gemachte Fehler}
+
+		\textbf{Lesbarkeit}
+		
+		\begin{itemize}
+			\item Einrückungen
+			\item CamelCase
+			\item JCC (Reihnfolge von Attribute, Konstruktoren, Methoden; Klammerungen)
+		\end{itemize}
+		
+		\textbf{Aufgabenstellung}
+		
+		\begin{itemize}
+			\item Methoden-Signaturen
+		\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ueb2 - Häufig gemachte Fehler}
+		\textbf{Javadoc}
+		
+		Gar kein Javadoc
+		
+		\begin{lstlisting}
+public char extractChar(int p1, String p2) {
+	//...
+}		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ueb2 - Häufig gemachte Fehler}
+		\textbf{Javadoc}
+		
+		Kein richtiges Javadoc
+		
+		\begin{lstlisting}
+/** Extrahiert eine Zeichen aus einem String*/
+public char extractChar(int p1, String p2) {
+	//...
+}
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ueb2 - Häufig gemachte Fehler}
+		\textbf{Javadoc}
+		
+		Unvollständiges Javadoc :-(
+		
+		\begin{lstlisting}
+/**
+ * Gibt ein Zeichen eines Strings zurueck
+ *
+ * @param p1 
+ * @param p2 
+ * @return
+ */
+public char extractChar(int p1, String p2) {
+	//...
+}
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Ueb2 - Häufig gemachte Fehler}
+		\textbf{Javadoc}
+		
+		\begin{lstlisting}
+/**
+ * Gibt ein Zeichen eines Strings zurueck
+ *
+ * Die Positionsangabe ist 0-basierend.
+ * Ist die Positionsangabe ungueltig (<0 oder >= laenge des Strings), wird ein Fehler auf der Konsole ausgegeben.
+ *
+ * @param p1 Position des Zeichens, das extrahiert werden soll. 0-basiert!
+ * @param p2 String aus dem das Zeichen extrahiert werden soll
+ * @return Das Zeichen aus dem String an der Stelle p1
+ */
+public char extractChar(int p1, String p2) {
+	//...
+}
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Ueb2 - Häufig gemachte Fehler}
+		\textbf{Design-Entscheidungen}
+		
+		\begin{lstlisting}
+public class Message {
+//...	
+	public Person getIssuer() {
+		return issuer;
+	}
+	
+	public void setIssuer(Person issuer) {
+		this.issuer = issuer;
+	}
+	
+	public String getText() {
+		return text;
+	}
+	
+	public void setText(String text) {
+		this.text = text;
+	}
+}
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[containsverbatim]
+\frametitle{Ueb2 - Häufig gemachte Fehler}
+		\textbf{Design-Entscheidungen}
+		
+		\begin{lstlisting}
+public class KITBook {
+	Person person1;
+	Person person2;
+	Person person3;
+	
+	Profile profile1;
+	Profile profile2;
+	Profile profile3;
+	//...
+}
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+\frametitle{Ueb2 - Häufig gemachte Fehler}
+		\textbf{Design-Entscheidungen}
+		
+		\begin{lstlisting}
+public class Timestamp {
+	int jahr;
+	int monat;
+	int tag;
+	int minuten = 0; //damit, wenn nicht gesetzt 0
+	int stunden = 0; // -"-
+	
+	public Timestamp(int minute, int stunde, int tag, int monat, int jahr) {
+		this.jahr = jahr;
+		this.monat = monat;
+		this.tag = tag;
+		this.minuten = minuten;
+		this.stunden = stunden;
+	}
+}
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Referenzen}
+\subsection{mal ohne Programmierkram}
+\begin{frame}{Was sind Referenzen?}
+	\textbf{Die gelben Seiten}
+	\pause
+	
+	Klempner: 
+	\begin{itemize}
+		\item Sanitär- und Heizungsinstallteur Wagner - 0721 / 488723
+		\item 24h Heizungs-Notdienst - 0762 / 42237
+		\item Rohre \& mehr - 1763 / 447231
+	\end{itemize}
+	\pause
+	
+	Mit den Referenzen können wir arbeiten:
+	\begin{itemize}
+		\item Methodenaufruf: "Hallo '24h Heizungs-Notdienst'? Bitte reparieren Sie meine Heizung"\pause  $\rightarrow$ notdienst.repair();\pause 
+		\item getMethode: "Hallo '24h Heizungs-Notdienst'? Was kostet eine Arbeitsstunde?"\pause $\rightarrow$ notdienst.getPrice();\pause
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Was sind Referenzen?}
+	\textbf{Die gelben Seiten}
+	
+	Klempner: 
+	\begin{itemize}
+		\item Sanitär- und Heizungsinstallteur Wagner - 0721 / 488723
+		\item 24h Heizungs-Notdienst - 0762 / 42237
+		\item Rohre \& mehr - 1763 / 447231
+	\end{itemize}
+	
+	Was passiert bei "Hallo '24h Heizungs-Notdienst'? Bitte reparieren Sie meine Heizung"\pause
+	\begin{enumerate}
+		\item Wir rufen '0762 / 42237'
+		\item wir bitten, dass die Heizung repariert wird
+		\item Der '24h Heizungs-Notdienst' wird die Heizung reparieren
+	\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Was sind Referenzen?}
+	\textbf{Die gelben Seiten}
+	
+	Klempner: 
+	\begin{itemize}
+		\item Sanitär- und Heizungsinstallteur Wagner - 0721 / 488723
+		\item 24h Heizungs-Notdienst - 0762 / 42237
+		\item Rohre \& mehr - 1763 / 447231
+	\end{itemize}
+	
+	Wir definieren uns einen neuen Namen in den gelben Seiten:
+	
+	NachtNotDienst = 24h Heizungs-Notdienst \pause
+	
+	Wie sieht das in den Gelben Seiten dann aus?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Was sind Referenzen?}
+	\textbf{Die gelben Seiten}
+	
+	Klempner: 
+	\begin{itemize}
+		\item Sanitär- und Heizungsinstallteur Wagner - 0721 / 488723
+		\item 24h Heizungs-Notdienst - 0762 / 42237
+		\item Rohre \& mehr - 1763 / 447231
+		\item NachtNotDienst - 0762 / 42237
+	\end{itemize} \pause
+	
+	Was prüfen wir bei 'NachtNotDienst == 24h Heizungs-Notdienst' ?\pause
+	
+	'0762 / 42237 == 0762 / 42237', also wahr.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Was sind Referenzen?}
+	\textbf{Die gelben Seiten}
+	
+	Klempner: 
+	\begin{itemize}
+		\item Sanitär- und Heizungsinstallteur Wagner - 0721 / 488723
+		\item 24h Heizungs-Notdienst - 0762 / 42237
+		\item Rohre \& mehr - 1763 / 447231
+		\item NachtNotDienst - 0762 / 42237
+	\end{itemize}
+	
+	Was passiert, wenn wir sagen 'new Klempner("Knut der Heizungsmeister")'?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Was sind Referenzen?}
+	\textbf{Die gelben Seiten}
+	
+	Klempner: 
+	\begin{itemize}
+		\item Sanitär- und Heizungsinstallteur Wagner - 0721 / 488723
+		\item 24h Heizungs-Notdienst - 0762 / 42237
+		\item Rohre \& mehr - 1763 / 447231
+		\item NachtNotDienst - 0762 / 42237
+		\item Knut der Heizungsmeister - 0742 / 228723
+	\end{itemize}
+	
+	Telefonnummern werden automatisch vergeben.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Und zurück zu Java}
+\begin{frame}{Immer dran deken:}
+	\begin{itemize}
+		\item '==' prüft bei Referenz-Typen ob zwei Objekte identisch sind.
+		\item Um zu prüfen ob zwei Objekte gleich aber nicht identisch sind, verwendet man 'equals'.\pause
+		\item Standartmäßig prüft 'equals' auf Identitätsgleicheit.
+		\item Man kann aber seine eigene equals-Methode schreiben.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\emph{Teddy.java}
+\begin{lstlisting}
+public class Teddy {
+	private String name;
+	
+	//hier konstruktor
+	
+	//hier Getter
+	
+	public boolean equals(Teddy otherInstance) {
+		return otherInstance.getName() == name;
+	}
+}
+\end{lstlisting}
+
+\emph{Main.java}
+\begin{lstlisting}
+//...
+Teddy myTeddy = new Teddy("Bruno");
+Teddy anotherTeddy = new Teddy("Bruno");
+if (myTeddy.equals(anotherTeddy)) {
+	System.out.println("Sie sind gleich");
+}
+//...
+\end{lstlisting}
+\end{frame}
+
+\section{Aufgabenblatt}
+\subsection{Aufgabenblatt}
+\begin{frame}[containsverbatim]
+\frametitle{Aufgabenblatt}
+Betrachten Sie die Methode
+\begin{lstlisting}
+public static int[] copy(int[] a) {
+	int[] b = new int[a.length];
+	for (int i = 0; i < a.length; i++) {
+		b[i] = a[i];
+	}
+	return b;
+}
+\end{lstlisting}
+die eine Kopie des Arrays a als Rückgabewert hat.
+\end{frame}
+
+\begin{frame}[containsverbatim] 
+\frametitle{Aufgabenblatt}
+Was ist zu beachten, wenn die Elemente des Arrays a nicht vom Typ int, sondern vom Typ Point sind? Das heißt, wenn die Methode wie folgt aussieht:
+\begin{lstlisting}
+public static Point[] copy(Point[] a) {
+	Point[] b = new Point[a.length];
+	for (int i = 0; i < a.length; i++) {
+		b[i] = a[i];
+	}
+	return b;
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+\frametitle{Aufgabenblatt}
+Schreiben Sie eine Methode
+\begin{lstlisting}
+	public static Point[] deepCopy(Point[] a)
+\end{lstlisting}
+die eine Kopie des Arrays a als Rückgabewert hat und dabei auch alle im Array a enthaltenen
+Objekte kopiert.
+\end{frame}
+
+\section{Listen}
+\subsection{Wozu?}
+\begin{frame}{Listen}
+	\textbf{Wozu braucht man Listen?}\pause
+	
+	Wie Array, nur dass die Größe nicht festgelegt werden muss.
+\end{frame}
+
+\subsection{Aufbau}
+\begin{frame}{Aufbau / Prinzip einer Liste}
+	Eine Liste besteht aus vielen Gliedern. Jedes Glied beinhaltet 
+	\begin{itemize}
+		\item Nutzdaten
+		\item Verweis auf das nächste Glied
+	\end{itemize}
+	
+	siehe dazu Tafel.
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Aufbau / Prinzip einer Liste}
+	
+	\emph{Cell.java}
+	\begin{lstlisting}
+public class Cell {
+	public Object value; //aus Platzgruenden keine setter/getter
+	public Cell next;
+}
+	\end{lstlisting}
+	
+	\textbf{Aufgabe:} Schreibe eine Methode, die das n-te Element aus einer Liste zurückgibt.
+	\begin{lstlisting}
+public Object getValue(int index)
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+		
+	\begin{lstlisting}
+public class List {
+	private Cell head;
+	
+	public Object getValue(int index) {
+		Cell currentCell = head;
+		int currentIndex = 0;
+		while (currentCell != null && currentIndex < index) {
+			currentCell = currentCell.next;
+			currentIndex++;
+		}
+
+		if (currentIndex < index) {
+			return null;
+		} else {
+			return currentCell.value;
+		}
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+\section{Zusammenfassung}
+\subsection{Zusammenfassung}
+\begin{frame}{Was haben wir heute gemacht?}
+	\begin{itemize}
+		\item Übungsblatt2
+		\item Referenzen
+		\item Listen
+	\end{itemize}
+\end{frame}
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

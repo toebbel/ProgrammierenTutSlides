@@ -1,0 +1,446 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Aufgabe 1}
+\subsection*{Objektorientierung}
+\begin{frame}{Objektorientierung}
+	\begin{itemize}
+		\item Probleme analysieren
+		\item Objekte finden
+		\item Aufgaben an Objekte zuweisen
+		\item Zusammenspiel zwischen Objekten überlegen\pause
+		\item ... und das ist gar nicht so einfach, wie es klingt
+		\item gute Übung für die beiden Abschlussaufgaben
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Aufgabe 1}
+	\begin{enumerate}
+		\item Nichts Programmieren
+		\item Klassen ausdenken
+		\item Welche Methoden hat welche Klasse und welche Parameter brauchen die Methoden?
+		\item Wie werden die Klassen untereinander benutzt?
+	\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Kniffel}
+Kniffel ist ein Würfelspiel und wird mit herkömmlichen Spielwürfeln gespielt. Jeder Spieler
+hat einen kleinen Zettel, auf dem er seine Ergebnisse eintragen muss. Gewinner ist, wer am Ende die
+höchste Summe auf seinem Zettel erzielen kann.
+Gespielt wird mit fünf Würfeln. Es wird reihum gewürfelt. In jeder Runde darf man bis zu drei Mal
+hintereinander würfeln. Dabei darf man „passende“ Würfel zur Seite legen und mit den verbleibenden
+weiter würfeln. Spätestens nach dem dritten Wurf muss man sich für ein freies Feld auf dem Spielzettel
+entscheiden, welches nun mit dem Ergebnis dieses Wurfes bewertet wird.
+Ist der Spielzettel voll, so ist das Spiel beendet und die Punkte werden zusammengezählt. Es
+gewinnt der Spieler mit den meisten Punkten.2
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Interfaces}
+\subsection*{Was ist das}
+\begin{frame}{Was ist ein Interface}
+	\emph{Wie eine abstrakte Klasse, die nur abstrakte Methoden und kein Attribut enthält.}\pause
+
+	\emph{Eine Zusicherung, dass eine Klasse bestimmte Methoden implementieren wird.}\pause
+
+	\textbf{Wichtigster Unterschied zu Ober-Klassen:}
+	\begin{itemize}
+		\item Klasse kann höchstens eine Ober-Klasse haben
+		\item Klasse kann beliebig viele Interfaces implementieren
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Begriffe}
+	\begin{itemize}
+		\item Ober-Klassen werden von Unter-Klassen \textbf{erweitert} ($\rightarrow$ \emph{extends})
+		\item Interfaces werden von Klassen implementiert ($\rightarrow$ \emph{implements})
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Verwendung}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ein Interface definieren}
+	\begin{lstlisting}
+public interface Profile {
+	boolean addInterestFor(Topic t);
+	
+	boolean removeInterest(Topic t);
+	
+	boolean hasInterestFor(Topic t);
+	
+	Topic[] getInterests();
+}
+	\end{lstlisting}
+	
+	Auch hier sollte man über das Interface und über jede Methode Javadoc schreiben ;)
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ein Interface implementieren}
+	\begin{lstlisting}
+public class PersonProfile implements Profile {
+	public addInterestFor(Topic t) {
+		//...
+	}
+	
+	public //...
+}
+
+	\end{lstlisting}
+	
+	\begin{enumerate}
+		\item Klasse implemenitert \textbf{alle} Methoden aus dem Interface ...
+		\item ... außer, die Klasse ist abstrakt
+		\item Javadoc zu implementierenden Methoden eigentlich nicht nötig ...
+		\item ... aber der Praktomat will das trotzdem.
+	\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Mehrere Interfaces implementieren}
+	\begin{lstlisting}
+public class PersonProfile implements AbstractProfile, Comparable {
+	public addInterestFor(Topic t) { //vom Interface AbstractProfile
+		//...
+	}
+	
+	//...
+	
+	public boolean equals(Object o) { //vom Interface Comparable
+		//...
+	}
+
+	//...
+}
+	\end{lstlisting}
+	
+	\emph{AbstractProfile ist in diesem Beispiel keine abstrakte Klasse, sondern ein Interface!}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Mehrere Interfaces implementieren und Klasse erweitern}
+	\begin{lstlisting}
+public class PersonProfile extends Person implements Profile, Comparable {
+	//...
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Generics}
+\subsection*{Notwendigkeit}
+\begin{frame}{Generics - Problem}
+
+	gespeichert werden sollen:
+	\begin{itemize}
+		\item befreundete Profile
+		\item gepostete Links
+		\item Personen im KITBook
+	\end{itemize}
+	
+	Am besten mit Listen.\pause
+	
+	\begin{itemize}
+		\item $\rightarrow$ \emph{ProfileList}
+		\item $\rightarrow$ \emph{LinkList}
+		\item $\rightarrow$ \emph{PersonList}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Generics - Problem}
+	(\emph{ProfileList, LinkList, PersonList})
+	
+	Listen sollen
+	\begin{enumerate}
+		\item Dinge hinzufügen können $\rightarrow$ \emph{add}
+		\item Dinge entfernen können $\rightarrow$ \emph{remove} \pause
+		\item Prüfen, ob ein Ding bereits enthalten ist $\rightarrow$ \emph{contains}
+		\item Dinge als Array ausgeben $\rightarrow$ \emph{getContent}
+	\end{enumerate}\pause
+	
+	$\rightarrow$ 4 Methoden pro Liste\pause $\rightarrow$ 12 Methoden insg.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Lösung}
+\begin{frame}[containsverbatim]
+	\frametitle{Generics - Lösung}
+	\textbf{Lösung:} Eine Liste schreiben, die beliebige Elemente verwaltet.
+	\begin{lstlisting}
+public class List {
+	public boolean add(??? thing) {
+		//...
+	}
+	
+	public boolean remove(??? thing) {
+		//...
+	}
+	
+	public boolean contains(??? thing) {
+		//...
+	}
+	
+	public ???[] getContent() {
+		//...
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Generics - Lösung}
+	\textbf{Was} für Dinge in der Liste gespeichert werden, wird mit einem \textbf{Parameter} bestimmt.\pause
+	
+	Parameter können außer Werten auch \textbf{Referenz-Typen} sein.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Generics - Lösung}
+	Typ-Parameter (in unserem Fall \emph{T}) bestimmt, welche Objekte in der Liste gespeichert werden.
+	\begin{lstlisting}
+public class List<T> {
+	public boolean add(T element) {
+		//...
+	}
+	
+	public boolean remove(T element) {
+		//...
+	}
+	
+	public boolean contains(T element) {
+		//...
+	}
+	
+	public T[] getContent() {
+		//...
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Generics - Lösung}
+	So sieht es aus, wenn man Instanzen von generischen Klassen verwendet:
+	\begin{lstlisting}
+public List<Person> = new List<Person>();
+public List<Link> = new List<Link>();
+public List<Profile> = new List<Profile>();
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Allgemeines}
+\begin{frame}[containsverbatim]
+	\frametitle{Generics}
+	\begin{itemize}
+		\item Werden in \emph{\textless \textgreater} gesetzt und stehen hinter der generischen Klasse
+		\item Interfaces können auch generisch sein
+		\item Generische Parameter sind immer Referenz-Typen (also kein int, boolean ,...)
+		\item Man kann auch mehrere Parameter auflisten
+	\end{itemize}
+	
+	\begin{lstlisting}
+public class MyClass<T, P> {
+	public T convert(P in) {
+		//...
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Generics - Allgemeines}
+	Generics-Parameter können auch eingeschränkt werden
+	
+	\emph{MyClass} kann mit Objekten vom Typ \emph{T} arbeiten, \textbf{wenn} diese Objekte \emph{Profile}-Objekte sind oder Objekte von \emph{Profile}-Unterklassen
+	\begin{lstlisting}
+public class MyClass<T extends Profile> {
+	//...
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Generics - Allgemeines}
+	Generics-Parameter können auch eingeschränkt werden
+	
+	\emph{MyClass} kann mit Objekten vom Typ \emph{T} arbeiten, \textbf{wenn} diese Objekte das Interface \emph{Listable} implementieren.
+	\begin{lstlisting}
+public class MyClass<T extends Listable> {
+	//...
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Aufgabe 2}
+\subsection*{Türme von Hanoi}
+\begin{frame}{Türme von Hanoi}
+	Das Spiel besteht aus drei Stäben A, B und C, auf die mehrere gelochte Scheiben gelegt werden,
+	alle verschieden groß. Zu Beginn liegen alle Scheiben auf Stab A, der Größe nach geordnet, mit der
+	größten Scheibe unten und der kleinsten oben. Ziel des Spiels ist es, den kompletten Scheiben-Stapel
+	von A nach C zu versetzen. Bei jedem Zug darf die oberste Scheibe eines beliebigen Stabes auf einen
+	der beiden anderen Stäbe gelegt werden, vorausgesetzt, dort liegt nicht schon eine kleinere Scheibe.
+	Folglich sind zu jedem Zeitpunkt des Spieles die Scheiben auf jedem Feld der Größe nach geordnet.
+\end{frame}
+
+\begin{frame}{Türme von Hanoi}
+	Schreiben Sie zunächst eine Klasse Disc, die eine gelochte Scheibe repräsentiert und als Attribut 			einen Durchmesser hat.\pause
+	
+	Schreiben Sie außerdem eine Klasse Pole, die einen Stab repräsentiert. Ein solcher Stab verwaltet eine
+	Menge von Discs (in einem fest dimensionierten Array) und hat als Attribut einen Namen. Die Klasse
+	Pole stellt dabei sicher, dass die Scheiben immer in geordneter Reihenfolge (wie oben beschrieben)
+	auf dem Stab liegen. Hierfür stellt die Klasse Pole die Methoden
+	\begin{itemize}
+		\item public boolean push(Disc d)
+		\item public Disc pop()	
+		\item public int size()
+	\end{itemize}
+	zur Verfügung.
+\end{frame}
+
+\begin{frame}{Türme von Hanoi}
+	Eine weitere Klasse Hanoi soll die main-Methode und eine Methode mit der Signatur
+	
+	\emph{public static void move(Pole from, Pole help, Pole to)} 
+	
+	erhalten.
+	
+	
+	Die Methode move(Pole from, Pole help, Pole to) legt dabei alle Scheiben das
+	Stabes from mit Hilfe des Stabes help auf den Stab to. Implementieren Sie diese Methode rekursiv.
+	Erzeugen Sie dann in der main-Methode einen Stab A mit mehreren Scheiben und zusätzlich zwei leere
+	Stäbe B und C. Verwenden Sie dann die Methode move(), um die Scheiben von Stab A mit Hilfe des
+	Stabes B auf Stab C zu legen.	
+\end{frame}
+
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

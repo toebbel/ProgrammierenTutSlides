@@ -1,0 +1,396 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Informationen}
+\begin{frame}{Info}
+	\begin{columns}[T]
+		 \begin{column}{5cm}
+			\includegraphics[scale=1.5]{bilder/eulenfest.png}		 
+		 \end{column}
+ 		 \begin{column}{5cm}
+			\textbf{Eulenfest}
+			\begin{itemize}
+				\item organisiert von Ersties
+				\item hier im Infobau
+				\item Tanzmatten und Zuckerwatte
+				\item Helfer gesucht (v.A. Auf-/Abbau)
+			\end{itemize}
+ 		 \end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Info}
+	Im Praktomaten gibt es zwei 4. Übungsblätter!
+	Gebt \textbf{entweder} beim ersten ab und schickt mir ne Mail, \textbf{oder} gebt beim späteren ab.
+	
+
+	Gebt bitte nur zur frühen Frist ab, wenn euch das Feedback von der Korrektur wichtig ist bzw. ihr mit eigenen Lösungen weiter rechnen wollt.
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Übungsblatt 3}
+\subsection{Häufig gemachte Fehler}
+\begin{frame}{Übungsblatt 3 - Häufig gemachte Fehler}
+	\begin{itemize}
+		\item Javadoc fehlt
+		\item JCC nicht eingehalten \pause
+		\item Geheimnisprinzip verletzt \pause
+		\item Compiler-Fehler \pause
+		\item Sonderfälle nicht abgefangen
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Was ist hier falsch?}
+	\begin{lstlisting}
+public Profile[] getFriends() {
+	Profile[] result = new Profile[getNumberOfFriends()];
+	int i = 0;
+		
+	for (int j = 0; j < this.friends.length; j++) {
+		if (this.friends[j] != null) {
+			result[i] = this.friends[j];
+		}
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Übungsblatt 3}
+	\begin{lstlisting}
+public Profile[] getFriends() {
+	Profile[] result = new Profile[getNumberOfFriends()];
+	int i = 0;
+		
+	for (int j = 0; j < this.friends.length; j++) {
+		if (this.friends[j] != null) {
+			result[i] = this.friends[j];
+			i++;
+		}
+	}
+	return result;
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Übungsblatt 3}
+	\begin{lstlisting}
+public boolean addFriendship(Person p1, Person p2) {
+	if (!containsPerson(p1) || !containsPerson(p2) || p1.isBefriendedWith(p1, p2) || p1 == null || p2 == null) {
+			return false;
+	}
+	p1.addFriendship(p2);
+	p2.addFriendship(p1);
+	return true;
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{NullPointerException}
+	\textbf{Was bedeutet das überhaupt?}\pause
+	
+	Aktion (Methode, Attributaufruf-/abfrage) auf eine \emph{null}-Referenz\pause
+	
+	\emph{null}-Referenzen sind Variabeln, deren Inhalt \emph{null} ist.\pause
+	
+	Exceptions treten erst bei der Ausführung des Programms auf und auch nicht immer!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{NullPointerException}
+	\begin{lstlisting}
+public boolean addFriendship(Person p1, Person p2) {
+	if(!p1.equals(null)) {
+		//...
+	}
+}
+	\end{lstlisting}
+	Das geht schief, wenn p1 \emph{null} ist.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{NullPointerException}
+	\begin{lstlisting}
+public boolean addFriendship(Person p1, Person p2) {
+	if(p1 != null) {
+		//...
+	}
+}
+	\end{lstlisting}
+	So prüfen wir, ob p1 eine \emph{null}-Referenz ist.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[containsverbatim]
+	\frametitle{'Abkürzungen' bei if}
+	\begin{lstlisting}
+public boolean addFriendship(Person p1, Person p2) {
+	if(p1 != null && !p1.isBefriendedWith(p2)) {
+		//...
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Vergleichen}
+	\textbf{Super-Wichtig!}
+	
+	\emph{equals} ist eine Methode, die Prüft, ob zwei Objekte die selben Eigenschaften haben
+	
+	\emph{==} prüft bei Referenz-Typen, ob es das identische Objekt ist!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Aufwärm-Aufgabe}
+\subsection{Aufwärmen}
+\begin{frame}{Aufwärm-Aufgabe}
+	Welche Methoden werden mit welchen Parametern aufgerufen? (Aufruf-Baum)
+	
+	Was ist das Ergebnis des Programms?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Methodenaufrufe}
+	void main()\pause
+	
+	-- String getText()\pause
+	
+	-- -- String getTheName()\pause
+	
+	-- -- -- String getTheName('''') $\rightarrow$ Carlson\pause
+	
+	-- -- -- String getTheName(''Carlson '') $\rightarrow$ Carlson vom Dach\pause
+	
+	-- getDatum()\pause
+	
+	-- -- getDatum(''24.'')\pause
+	
+	-- -- -- getDatum(''24.12.'')\pause
+	
+	-- -- -- -- getDatum(''24.12..2011'') \pause
+	
+	-- -- -- -- -- getDatum(''24.12..2011 Weihnachten'') $\rightarrow$ 24.12..2011 Weihnachten\pause
+	
+	-- (wieder) String getText()$\rightarrow$ Ausgabe von allem.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Rekursion}
+\subsection*{Was, wozu und wie?}
+\begin{frame}[containsverbatim]
+	\frametitle{Rekursion}
+	\textbf{Rekursion nimmt einen Arbeit ab}	
+	
+	Eine Methode arbeitet rekursiv, wenn sie sich selbst aufruft.
+	
+	\begin{lstlisting}
+public int methode(int p) {
+	//...
+	return methode(p + x);
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Rekursion}
+	Was braucht man für eine Abbruchbedingung?
+	
+	\begin{itemize}
+		\item eine Methode \pause
+		\item eine Abbruchbedingung \pause
+		\item Wertveränderung für rekursiven Aufruf \pause
+	\end{itemize}
+	
+	\textbf{Abbruchbedingung} weil wir sonst in einer Endlosschleife sind.
+	\textbf{Wertveränderung} weil wir sonst nichts gewonnen haben.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgaben}
+\subsection{Rekursion}
+\begin{frame}{Aufgabe - Fakultät berechnen}
+	Schreibe eine Methode, die $n!$ berechnet.
+	
+	\textbf{Tips:}
+	\begin{itemize}
+		\item Rekursiv lösen
+		\item Als erstes Abbruchbedingung überlegen
+		\item Parameter < 1 kommen einfach nicht vor.
+		\item benutz die Datei \emph{FacCalc.java}
+		\item Versucht es ohne Eclipse ;-P
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Aufgabe - Fibonacci-Folge}
+	Schreibe eine Methode, die Fibonacci-Folgen berechnen kann
+	
+	$f(n) = \begin{Bmatrix}
+		n & n = 1 oder 0 \\
+		f(n - 1) + f(n - 2) & sonst
+	\end{Bmatrix}$
+	
+	\textbf{Tips:}
+	\begin{itemize}
+		\item Rekursiv lösen
+		\item Als erstes Abbruchbedingung überlegen
+		\item Parameter < 0 kommen einfach nicht vor.
+		\item benutz die Datei \emph{FiboCalc.java}
+		\item Versucht es ohne Eclipse ;-P
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}{Aufgabe - Bonus-Fibonacci-Folge}
+	Erweitere die Lösung, sodass bereits berechnete Ergebnisse wiederverwendet werden können.
+	
+	\textbf{Tips:}
+	\begin{itemize}
+		\item Array
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Übungsblatt 4}
+\subsection*{Hinweise}
+\begin{frame}{zum aktuellen ÜB4}
+
+	Zu Links gab es sehr viele unterschiedliche Ansätze. Übernehmt bitte die Musterlösung (auch wenn sie \emph{doof} ist)!
+	
+	\begin{itemize}
+		\item schmeißt \emph{KITBook} / \emph{KITBook} aus \emph{KITBook} raus!
+		\item Verwendet die Musterlösung
+		\item Wurzeln berechnen mit \emph{Math.sqrt(double)}
+		\item Wenn man nicht weiter weiß: Signatur hin schreiben und weiter mit nächster Aufgabe
+		\item Macht die Zusatzaufgabe
+	\end{itemize}
+\end{frame}
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

@@ -1,0 +1,324 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Organisatorisches}
+\subsection*{zum Übungsschein}
+\begin{frame}{Übungsschein}
+	
+	\textbf{Leute mit Punkten $\epsilon \left[60, \infty \right)$}
+		\begin{itemize}
+			\item Meldet euch für den Übungsschein an! Frist ist der 31.1., 23:59 Uhr.
+		\end{itemize}
+
+	\textbf{Leute mit Punkten $\epsilon \left[30, 60 \right)$}
+	\begin{itemize}
+		\item Blätter werden bis 31.1., 9:30 korrigiert sein.
+		\item Übungsleiter überträgt Punkte im Laufe des Vormittages ins Prüfungssystem.
+		\item Ihr meldet euch Nachmittags für den Schein an.
+	\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Java-API benutzen}
+\subsection*{tolles aus der Java-API}
+
+\begin{frame}{Tolles aus der Java-API}
+
+	\textbf{Die Java-API...}
+	\begin{itemize}
+		\item bietet viele Dinge, die man oft braucht
+		\item kann in Abschlussaufgaben z.T. verwendet werden (wenn nicht anders in den Aufgaben gefordert)
+		\item ist in \emph{packages} organisiert\pause
+		\begin{itemize}
+			\item Packages können Unter-Packages haben
+			\item Funktionalität kann man importieren ($\rightarrow$ \emph{import})\pause
+			\item Das Package \emph{java.lang} ist immer importiert
+			\item $\rightarrow$ \emph{java.lang.String} ist das selbe wie \emph{String}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Tolles aus der Java-API}
+
+	\textbf{zwei Dinge aus der Java-API}
+	\begin{itemize}
+		\item Listen (\emph{Comparable}-Interface) \pause $\rightarrow$ \emph{java.lang}\pause
+		\item Sortieren (\emph{Comparable}-Interface) \pause $\rightarrow$ \emph{java.util}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Listen}
+\begin{frame}{Listen aus Java verwenden}
+	\begin{center}
+		\begin{Huge}
+			\textbf{Demo}
+		\end{Huge}
+	\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Listen aus Java verwenden}
+	
+	\emph{Ohne import}
+	\begin{lstlisting}
+public class ListDemo {
+	java.util.List<Point> myList; //defines List for Points
+	//...
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Listen aus Java verwenden}
+	
+	\emph{Mit import}
+	\begin{lstlisting}
+import java.util.*; //import all Classes of package util.
+
+public class ListDemo {
+	List<Point> myList; //defines List for Points
+	//...
+}
+	\end{lstlisting}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Vergleichen}
+\begin{frame}{Sortieren mit der Java-API}
+
+	\textbf{Sortieren}
+	\begin{itemize}
+		\item Um Dinge sortieren zu können, muss man sie untereinander vergleichen könnnen (\emph{A ist größer als B})	
+		\item Nicht immer trivial (z.B. Profile sortieren)
+	\end{itemize}\pause
+
+	Zum vergleichen von zwei Elementen gibt es das \emph{Comparable}-Interface aus dem Package \emph{java.util}.
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Das Interface Comparable}
+	"\emph{public interface Comparable<T>}\\
+	\begin{lstlisting}
+This interface imposes a total ordering on the objects of each class that implements it. This 				ordering is referred to as the class's natural ordering, and the class's compareTo method is referred 	to as its natural comparison method."
+	\end{lstlisting}
+
+	\url{http://docs.oracle.com/javase/6/docs/api/java/lang/Comparable.html}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Das Interface Comparable}
+
+	\begin{lstlisting}	
+Compares this object with the specified object for order. Returns a negative integer, zero, or a positive integer as this object is less than, equal to, or greater than the specified object.
+
+The implementor must ensure sgn(x.compareTo(y)) == -sgn(y.compareTo(x)) for all x and y. (This implies that x.compareTo(y) must throw an exception iff y.compareTo(x) throws an exception.)
+
+The implementor must also ensure that the relation is transitive: (x.compareTo(y)>0 && y.compareTo(z)>0) implies x.compareTo(z)>0.
+
+Finally, the implementor must ensure that x.compareTo(y)==0 implies that sgn(x.compareTo(z)) == sgn(y.compareTo(z)), for all z.
+
+It is strongly recommended, but not strictly required that (x.compareTo(y)==0) == (x.equals(y)). [...}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Das Interface Comparable}
+	"\emph{public interface Comparable<T>}\\
+	\textbf{CompareTo(T o)} $\rightarrow$ \emph{e1.compareTo(e2)}\\
+	\begin{itemize}
+		\item e1.compareTo(e2) \textgreater 0 $\Rightarrow$ e1 ist größer
+		\item e2.compareTo(e1) \textless 0 $\Rightarrow$ e2 ist größer
+		\item e2.compareTo(e1) = 0 $\Rightarrow$ e1 und e2 gleich groß\pause
+		\item e1.equals(e2) == true $\Rightarrow$ e1.compareTo(e2) == 0
+		\item e1.equals(e2) == (-1) * e2.compareTo(e1)
+		\item e1.equals(e2) == true $\Longleftrightarrow$ e1.compareTo(e2) == 0\pause
+		\item e1.compareTo(null) $\rightarrow$ NullPointerException 
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Vergleichen}
+	\begin{center}
+		\begin{Huge}
+			\textbf{Demo}
+		\end{Huge}
+	\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Sortieren}
+\begin{frame}{Sortieren}
+	\emph{java.util.Collections} bietet viele nütliche Funktionen an:
+	\begin{itemize}
+		\item binarySerach
+		\item sort
+		\item swap
+		\item rotate
+		\item reverseOrder
+	\end{itemize}
+	
+	Alle Operationen benötigen Instanzen von \emph{List<T>}
+
+	\url{http://docs.oracle.com/javase/6/docs/api/java/util/Collections.html}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Sortieren}
+	\begin{center}
+		\begin{Huge}
+			\textbf{Demo}
+		\end{Huge}
+	\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Sortieren}
+	Wenn die Elemente einer Liste untereinander vergleichbar sind, dann kann man mit \emph{java.util.Collections.sort()} diese Liste sortieren.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Übungsblatt 6}
+\subsection*{Übungsblatt 6}
+
+\begin{frame}{Übungsblatt 6}
+	\begin{itemize}
+		\item zwei Aufgaben (eine davon Zusatzaufgabe)
+		\item bitte \textbf{getrennt} voneinander im Praktomaten abgeben
+		\item Das erste mal Testfälle im Praktomaten
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Testfälle und der Praktomat}
+	\textbf{Testfälle für dieses Übungsblatt}
+	\begin{itemize}
+		\item Tests werden beim einreichen der Lösung durchgeführt
+		\item diese Tests sind optional zu bestehen
+		\item versucht aber die Tests auf jeden Fall zu bestehen
+	\end{itemize}\pause
+	
+		\textbf{Testfälle für die Abschlussaufgaben}
+	\begin{itemize}
+		\item Für die Abschlussaufgabe gibt es (wahrscheinlich) Pflicht-Tests (muss man bestehen, um überhaupt abgeben zu können) und ...
+		\item ... Optionale Tests (sollte man bestehen) und ...
+		\item ... geheime Tests, die ihr nicht seht, aber bei der Korrektur berücksichtigt werden
+		\item $\Rightarrow$ testet eure Abschlussaufgaben selbst!
+	\end{itemize}
+\end{frame}
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

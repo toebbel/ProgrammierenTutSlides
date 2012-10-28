@@ -1,0 +1,506 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Papierkram}
+\subsection*{Papierkram}
+\begin{frame}{Papierkram}
+	\begin{itemize}
+		\item Die erste Abschlussaufgabe beginnt am \textbf{1.2.2012}
+		\item Bis zum 31.1.2012, 23:59 \textbf{müsst} ihr euch für die Prüfung (Nr. 199) anmelden!
+		\item Das geht, sobald ihr den Übungsschein habt (frühstens ab heute möglich)	
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Übungsblatt 4}
+\subsection*{Wozu war es gut?}
+\begin{frame}{Übungsblatt 4}
+	\begin{itemize}
+		\item Klassenvererbung sinnvoll eingesetzt
+		\item nicht nur \emph{sinnfreie} Methoden
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Fehler}
+\begin{frame}[containsverbatim]
+	\frametitle{Was ist hier falsch?}
+	\emph{CompositeProfileSimilarity}
+	\begin{lstlisting}
+public CompositeProfileSimilarity(double lambda,
+		ProfileSimilarity m1, ProfileSimilarity m2) {
+	this.m1 = m1;
+	this.m2 = m2;
+	this.lambda = lambda;
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Exceptions}
+\subsection*{Exceptions}
+\begin{frame}{Was sind Exceptions?}
+	Exceptions sind Ausnahmen.\pause
+	\begin{itemize}
+		\item Ausnahmen sind Fehler die nicht zu erwarten waren.\pause
+		\item Fehler sind Zustände eines Programms, sodass das Programm nicht das gewünschte Verhalten zeigt
+	\end{itemize}\pause
+	
+	Exceptions sind auch:
+	\begin{itemize}
+		\item Objekte, die man \emph{werfen} und \emph{fangen} kann\pause
+		\item Spezielle Programm-Konstrukte für Ausnahmebehandlungen
+	\end{itemize}\pause
+	
+	\textbf{Paradox:} Wenn sie nicht zu erwarten waren, warum kann man sie dann erwarten und fangen?
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Exceptions sind Objekte}
+	\textbf{Was für Exceptions gibt es?}
+	
+	Exception (erbt von Throwable)
+	\begin{itemize}
+			\item RuntimeException
+			\begin{itemize}
+				\item NullPointerException
+				\item IllegalArgumentException
+				\item InvalidStateException
+			\end{itemize}
+			\item IOException
+			\begin{itemize}
+				\item FileNotFoundException
+			\end{itemize}
+	\end{itemize}\pause
+	
+	Alle Exception-Unterklassen findet man in der Doku:\\
+	\url{http://docs.oracle.com/javase/7/docs/api/index.html}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Exceptions fangen}
+\begin{frame}{Fehler fangen}
+	\begin{center}
+		\textbf{Demo}
+	\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ausnahmen fangen}
+	
+	\textbf{Eine \emph{Exception} behandeln}
+	\begin{lstlisting}
+//normal stuff here
+try {
+	//critical stuff
+} catch (RuntimeException ex) { //maybe another Exception type
+	//error-handling
+}
+//normal stuff here
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ausnahmen fangen}
+	
+	\textbf{zwei unterschiedliche \emph{Exceptions} behandeln}
+	\begin{lstlisting}
+//normal stuff here
+try {
+	//critical stuff
+} catch (IOException ex) { //catch ony IO-Exceptions
+	//error-handling #1
+} catch (OutOfBounceException ex) { //catch ony OutOfBounce-Exceptions
+	//error-handling #2
+}
+//normal stuff here
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ausnahmen fangen}
+
+	\textbf{Eine \emph{Exception} behandeln (Ninja-Level)}
+	\begin{lstlisting}
+//normal stuff here
+try {
+	//critical stuff
+} catch (IOException ex) { //catch ony IO-Exceptions
+	//error-handling #1
+	System.out.println("Error " + ex.getMessage() + ", in " + printStackTrace());
+} finally {
+	//tidy up
+}
+//normal stuff here
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{NIEMALS}
+	
+	\begin{lstlisting}
+//normal stuff here
+try {
+	//critical stuff
+} catch (Exception ex) {
+	//error-handling
+}
+//normal stuff here
+	\end{lstlisting}
+\end{frame}
+
+\begin{frame}{NIEMALS}
+	\includegraphics[scale=1]{bilder/catch_em_all.png}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Ausnahmen werfen}
+\begin{frame}{Wann darf ich eine Ausnahmen werfen?}
+
+	Exceptions werfen, wenn.
+	\begin{itemize}
+		\item Parameter ungültig
+		\item Zustand, den man nicht erreichen darf
+		\begin{itemize}
+			\item etwas was man braucht, ist nicht da
+			\item andere Voraussetzung nicht erfüllt
+		\end{itemize}
+	\end{itemize}
+	
+\textbf{Nicht bei Dingen, die man Abfragen kann}\pause
+
+In privaten Methoden muss man die Parameter nicht nochmal prüfen, wenn das in den entsprechenden öffentlichen schon gemacht wurde.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Wann darf ich eine Ausnahmen werfen?}
+	\textbf{Beispiel \emph{KITBook}}
+	
+	In der \emph{Shell-Klasse} müssen falsche Benutzereingaben (Parameter fehlt usw) mit If/Switch-Case/... behandelt werden\pause
+	
+	In \emph{KITBook} kann ein Fehler geworfen werden, wenn z.B. eine Person kein Profil hat (\emph{areFriends}) $\rightarrow$ \emph{PersonNotFoundException} (erbt z.B. von \emph{IllegalArgumentException})\pause
+	
+	Trotzdem: Shell prüft vor Aufrufen auf \emph{KITBook}, ob alles stimmt.
+	
+	$\rightarrow$ Doppelte Prüfung von Parameter
+	
+\end{frame}
+
+\begin{frame}{Wann darf ich eine Ausnahmen werfen?}
+	\textbf{Generell...}
+		
+	...stellen Ausnahmen \textbf{KEINE} Steuerung des Kontrollflusses dar!
+\end{frame}
+
+\begin{frame}{Welche Ausnahmen darf ich werfen?}
+	\begin{itemize}
+		\item eigene Error-Unterklassen
+		\item eigene RuntimeException-Unterklassen\pause
+		\item passende RuntimeException-Unterklassen\pause
+		\begin{itemize}
+			\item InvalidStateException
+			\item UnsupportedOperationException
+			\item NullPointerException
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Fehler werfen}
+	\begin{center}
+		\textbf{Demo}
+	\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ausnahmen werfen}
+
+\begin{lstlisting}
+if(universeWillExplode = true) { //is there an exception?
+	throw new IllegalStateException(); //throw a new Exception
+	//method won't be continued. Acts like a return
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ausnahmen werfen}
+
+\begin{lstlisting}
+if(universeWillExplode = true) { //is there an exception?
+	throw new IllegalStateException("The universise is going to explode!"); //throw a new Exception with message
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Eigene Exceptions definieren}
+	\emph{MyCustomException.java}
+	\begin{lstlisting}
+/**
+ * This Exception indicates ....
+ */
+public class MyCustomException extends RuntimeException{
+	//Constructor with default message
+	public MyCustomException() {
+		super("An Mycustom-Exception occured!");
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Eigene Ausnahmen werfen}
+
+	\emph{UniverseExplodeException.java} 
+	\begin{lstlisting}
+public class UniverseExplodeException extends RuntimeException{
+	//Constructor with default message
+	public UniverseExplodeException() {
+		super("The universe will explode!");
+	}
+}
+	\end{lstlisting}
+	
+	\begin{lstlisting}
+if(universeWillExplode = true) { //is there an exception?
+	throw new UniverseExplodeException();
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Eigene Ausnahmen werfen}
+
+	\textbf{Ausnahmen, die nicht von \emph{RuntimeException} erben, müssen angekündigt werden} (Methodensignatur und Javadoc)
+	\begin{lstlisting}
+/**
+ * The foo method ...
+ * @throws UniverseExplodeException when the universe is 
+ * going to explode
+ **/
+public void foo() throws UniverseExplodeException
+	if(universeWillExplode = true) { //is there an exception?
+		throw new UniverseExplodeException();
+	}
+}
+	\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Ausnahmen}
+	\begin{center}
+		\textbf{Fragen zu Ausnahmen?}
+	\end{center}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tiefensuche}
+\subsection*{Tiefensuche}
+\begin{frame}{Tiefensuche}
+	\emph{Was ist Tiefensuche?}
+	
+	\emph{Beispiel:} Wir haben Ordner. Ordner beinhalten Dateien und andere Ordner. Wir wollen eine Datei bzw. einen Ordner finden.
+	
+	$\rightarrow$ siehe Tafel
+\end{frame}
+
+\begin{frame}{Aufgabe}
+	\textbf{Aufgabe:} Schreibe eine Datei-Tiefensuche.
+	
+	Die Methode \emph{Contains(String)} soll angeben, ob es eine Datei gibt, oder nicht.
+	
+	\begin{itemize}
+		\item IOElement repräsentiert Ordner und Dateien
+		\item Dateien haben keine Kinder $\rightarrow$ getChildren() liefert null.
+		\item benutze private Hilfsmethode (\emph{contains(String, IOElement[] in)})
+	\end{itemize}
+	
+	Soll-Ausgabe: true, false, true
+\end{frame}
+
+\begin{frame}{Aufgabe}
+	\textbf{Aufgabe:} Schreibe eine Datei-Tiefensuche.
+	
+	Die Methode \emph{getPathTo(String)} soll den Pfad zu einer gegebenen Datei angeben (oder \emph{not found :-(}).
+	
+	\begin{itemize}
+		\item IOElement repräsentiert Ordner und Dateien
+		\item Dateien haben keine Kinder $\rightarrow$ getChildren() liefert null
+		\item benutze private Hilfsmethode (\emph{contains(String, IOElement[] in)})
+	\end{itemize}
+	
+	\textbf{Soll-Ausgabe:} \\
+				\textbackslash Folder1\textbackslash FileA\\
+				not found :-(\\
+				\textbackslash Folder3\textbackslash Folder4\textbackslash Folder5\textbackslash FileH
+\end{frame}
+
+\begin{frame}{Aufgabe}
+\textbf{Aufgabe:} Schreibe \emph{getPathTo} so um, dass sie eine Ausnahme wirft, wenn die angegebene Datei nicht gefunden wurde.
+
+	\begin{itemize}
+		\item Definiere dazu eine eigene Exception-Klasse, die von \emph{Error} erbt
+		\item Throws-Schlüsselwort bei der Methode \emph{getPathTo} nicht vergessen
+		\item Javadoc!
+		\item Fang die Exception nicht und schau, was passiert.
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Übungsblatt 5}
+\subsection*{Hinweise}
+\begin{frame}{zum aktuellen ÜB5}
+
+	Übernehmt bitte die Musterlösung (auch wenn sie \emph{doof} ist)!
+	
+	\begin{itemize}
+		\item !Abgabe bis 16.1.2012
+		\item Verwendet die Musterlösung
+		\item Lasst euch von all dem Mathe-Zeug nicht entmutigen!
+		\item \emph{adäquates Verhalten öffentlicher Methoden bei ungültigen Parametern}
+		\item Wenn man nicht weiter weiß: Signatur hin schreiben und weiter mit nächster Aufgabe
+		\item Macht die Zusatzaufgabe (diesmal unabhängig vom KITBook)
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Zusammenfassung}
+\subsection*{Zusammenfassung}
+\begin{frame}{Zusammenfassung}
+	\textbf{Was haben wir heute gemacht?}
+	
+	\begin{itemize}
+		\item Exceptions werfen und fangen
+		\item kein Gonna catch 'em all!
+		\item Eigene Exceptions definieren
+		\item Tiefensuche implementiert
+	\end{itemize}
+\end{frame}
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

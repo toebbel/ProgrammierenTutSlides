@@ -1,0 +1,348 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Arrays}
+\subsection{Was ist das?}
+\begin{frame}{Was sind Arrays ...}
+	\textbf{... und wozu braucht man sie?} \pause
+		\begin{itemize}
+			\item viele Werte in einem Variablennamen
+			\item Elemente haben alle den selben Wert
+		\end{itemize}
+		
+		$\rightarrow$ Zu jeden \emph{Typen} gibt es ein Array.\pause
+		
+		Wichtig: Arrays sind komplexe Datentypen! $\rightarrow$ new verwenden!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Arrays ...}
+		
+		... deklarieren
+		\begin{lstlisting}
+int[] myArray; //Integer-Array
+		\end{lstlisting}
+
+		... deklarieren und instanzieren
+		\begin{lstlisting}
+int[] myArray = new int[3]; //Arrays with three int values
+		\end{lstlisting}
+		
+		... deklarieren und initialisieren
+		\begin{lstlisting}
+int[] myArray = {5, 3, 1}; //Define the values of the array -> size implicit
+		\end{lstlisting}
+
+		\pause !!! Kommentare auf dieser Folie sind \textbf{NICHT} gut !!!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{verschiedene Arrays}
+		
+		\begin{lstlisting}
+double[] myArr1; //array of doubles
+Teddy[] myTeddyArr; //array of Teddys
+String[] myStrArray; //array of Strings
+		\end{lstlisting}
+		
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{mit Arrays arbeiten}
+		
+		\begin{lstlisting}
+String[] names = new String[4];
+names[0] = "Timmy"; //defines value of the FIRST element
+names[3] = "Bernd"; //Sets the LAST element
+names[4] = "Alice"; //will throw a IndexOutOfBoundException
+		\end{lstlisting}
+		
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[containsverbatim]
+	\frametitle{Einschub Exceptions}
+		
+		Bei Java gibt es
+		\begin{itemize}
+			\item Compiler-Fehler (Syntax)
+			\item Laufzeit-Fehler (Exceptions)
+		\end{itemize}
+		
+		\pause	Laufzeitfehler sind abhängig vom Verlauf des Programs und können meistens nicht vorhergesehen werden.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Arrays sind Objekte}
+\begin{frame}
+	\frametitle{Arrays sind Objekte}
+		
+		$\rightarrow$ deshalb haben sie Methoden und Attribute.\pause
+		
+		
+		z.B. \emph{length} $\rightarrow$ gibt die Anzahl der Elemente zurück
+		
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Mit Arrays arbeiten}
+\begin{frame}[containsverbatim]
+	\frametitle{Aufgabe}
+		Wir haben ein Array mit Zahlen gegeben und wollen den Durchschnitt errechnen.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Aufgabe}
+		Wir haben ein Array mit Flughafen-Kürzeln gegeben und möchten den Inhalt auf der Konsole ausgeben.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Aufgabe}
+		Jetzt wollen wir das Flughafen-Kürzel-Array in umgekehrter Reihnfolge ausgeben.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Aufgabe}
+		Jetzt wollen wir jedes dritte Element ausgeben.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Arrays kopieren}
+		
+		\textbf{was passiert hier?}
+		\begin{lstlisting}
+String[] myArr1 = {"geh", "du", "alter", "esel"};
+String[] myArr2 = myArr1;
+myArr2[3] = "sack";
+for (int i = 0; i < myArr1.length; i++) {
+	System.out.println(myArr1[i] + " ");
+}
+		\end{lstlisting}
+		
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Arrays kopieren}
+		\textbf{So funktioniert's:}
+		\begin{lstlisting}
+String[] myArr1 = {"geh", "du", "alter", "esel"};
+String[] myArr2 = new String[myArr1.length];
+
+//makes a deep copy myArr1 -> myArr2
+for (int i = 0; i < myArr1.length; i++) {
+	myArr2[i] = myArr[i];
+}
+		\end{lstlisting}
+		
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Aufgabe}
+		Zurück zum Flughafen-Array:
+		Jetzt wollen wir das Array in umgekehrter Reihnfolge kopieren.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Mehrdimensionale Arrays}
+		
+		\begin{lstlisting}
+boolean[][] map = new boolean[10][10];
+		\end{lstlisting}
+		
+		\textbf{Was ergeben diese Ausdrücke:}
+		\begin{itemize}
+			\item map.length
+			\item map[0]
+		\end{itemize}
+		
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Mehrdimensionale Arrays}
+		
+		\begin{lstlisting}
+boolean[][] map = new boolean[10][10];
+		\end{lstlisting}
+		
+		\textbf{Aufgabe:} Wir wollen alle Werte auf der Diagonalen auf true setzen, alle anderen auf false
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Inception-Arrays}
+		
+		Wer hat am Abend wie viel getrunken?
+		\begin{lstlisting}
+double[] drinkListAnna = {0.3, 0.25, 0.5, 0.02};
+double[] drinkListClaus = { };
+double[] drinkListPeter = {0.5, 0.5, 0.5, 0.02, 0.5, 0.5, 0.5, 0.02, 0.02};
+
+double[][] party = {drinkListAnna, drinkListClaus, drinkListPeter};
+		\end{lstlisting}
+		
+		\textbf{Aufgabe:} Liste aller Getränke auflisten
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Arrays vergrößern}
+		
+		\begin{lstlisting}
+String[] guestList = new String[4];
+guestList[0] = "Peter";
+guestList[1] = "Susi";
+guestList[2] = "Franz";
+guestList[3] = "Chuck Norris";
+		\end{lstlisting}
+		
+		\textbf{Aufgabe:} Schreibe eine Methode, mit der man die Gästeliste um eine Person erweitern kann.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgabenblatt}
+\subsection{Aufgabenblatt}
+\begin{frame}{Aufgabenblatt}
+	
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Zusammenfassung}
+\subsection{Zusammenfassung}
+\begin{frame}{Zusammenfassung}
+
+	Arrays ...
+	\begin{itemize}
+		\item ... machen
+		\item ... füllen
+		\item ... durchlaufen
+		\item ... kopieren
+	\end{itemize}
+\end{frame}%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

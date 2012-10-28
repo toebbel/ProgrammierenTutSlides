@@ -1,0 +1,663 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ausdrücke und Anweisungen}
+\subsection{Ausdrücke}
+\begin{frame}
+	\frametitle{Ausdrücke ...}
+	\framesubtitle{richtig harte Ausdrücke ...}
+	
+	\textbf{Was war das nochmal?} \pause
+	
+		\begin{itemize}
+			\item ... ergeben einen Wert/Aussage
+			\item ... haben einen Datentyp
+			\item ... können geschachtelt werden
+			\item ... können aneinandergereit werden
+		\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Ausdrücke}
+	\framesubtitle{richtig harte Ausdrücke ...}
+	
+		\textbf{Aufgabe:} Finde die Ausdrücke	
+		\begin{lstlisting}
+int x = 5;
+y = x;
+y++;
+int z = addiere(x, y) + 1;
+double d = addiere(addiere(x, y), addiere(4, z));
+if(d == 27)
+	System.out.println("wow!");
+		\end{lstlisting}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Anweisungen}
+\begin{frame}
+	\frametitle{Anweisungen ...}
+
+		\pause
+		\begin{itemize}
+			\item ... haben keine Rückgabe / Typ
+			\item ... führen Zustandsänderungen durch
+		\end{itemize}
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Anweisungen}
+	\framesubtitle{richtig harte Anweisungen ...}
+	
+		\textbf{Aufgabe:} Finde die Anweisungen
+		\begin{lstlisting}
+int x = 5;
+y = x;
+int z = addiere(x, y);
+double d = addiere(addiere(x, y), addiere(4, z));\end{lstlisting}
+		
+		
+		
+		\pause $\rightarrow$ Alle Ausdrücke sind Teil einer Anweisung!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Abstraktion}
+\subsection{Anonyme Objekte}
+\begin{frame}[containsverbatim]
+	\frametitle{Anonyme Objekte}
+		\emph{Kreis.java}
+		\begin{lstlisting}
+public class Kreis {
+	int x, y, radius;
+	public Kreis(int x, int y, int radius) {
+		this.x = x;
+		this.y = y;
+		this.radius = radius:
+	}
+}
+		\end{lstlisting}
+		
+		\emph{Main.java}
+		\begin{lstlisting}
+//...
+Kreis myKreis = new Kreis(10, 15, 3);
+//...
+		\end{lstlisting}
+		
+		Was könnte man hier besser machen
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Anonyme Objekte}
+	
+	\emph{Kreis.java}
+	\begin{lstlisting}
+public class Kreis {
+	int radius;
+	Punkt mittelpunkt;
+	public Kreis(Punkt mp, int radius) {
+		this.radius = radius;
+		mittelpunkt = mp;
+	}
+}
+		\end{lstlisting}
+	
+		\emph{Main.java}
+		\begin{lstlisting}
+//...
+Punkt myPunkt = new Punkt(10, 15);
+Kreis myKreis = new Kreis(myPunkt, 3);
+//...
+		\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{Anonyme Objekte}
+	\emph{Kreis.java}
+		
+	... bleibt unverändert	
+	
+	
+	
+		\emph{Main.java}
+		\begin{lstlisting}
+//...
+Kreis myKreis = new Kreis(new Punkt(10, 15), 3);
+//...
+		\end{lstlisting}
+		
+		Wir brauchen die Variable \emph{myPunkt} nicht mehr, nachdem wir unseren Kreis erzeugt haben $\rightarrow$ Warum sollten wir ihr einen Namen geben?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Getter-Methoden}
+\begin{frame}[containsverbatim]{Geheimnisprinzip}
+\begin{lstlisting}
+class Student {
+	String name;
+	int semester;
+	int matriculationNumber;
+	
+	//Konstruktor usw.
+}
+\end{lstlisting}
+\begin{lstlisting}
+class Main {
+	public static void main(String[] args) {
+		//einen neuen Studenten erzeugen
+		Student maxMustermann = new Student("Max Mustermann", 3, 1234567);
+		//die Matrikelnummer laesst sich ganz einfach aendern
+		maxMustermann.matriculationNumber = 4545454;
+		//...
+\end{lstlisting}
+\ \\ \ \\
+\end{frame}
+
+\begin{frame}[containsverbatim]{Geheimnisprinzip}
+\begin{lstlisting}
+class Student {
+	String name;
+	int semester;
+	int matriculationNumber;
+	
+	//Konstruktor usw.
+}
+\end{lstlisting}
+\begin{lstlisting}
+class Main {
+	public static void main(String[] args) {
+		//einen neuen Studenten erzeugen
+		Student maxMustermann = new Student("Max Mustermann", 3, 1234567);
+		//die Matrikelnummer laesst sich ganz einfach aendern
+		maxMustermann.matriculationNumber = 4545454;
+		//...
+\end{lstlisting}
+Die Matrikelnummer sollte doch nachträglich \textbf{nicht} verändert werden können...
+\end{frame}
+
+\begin{frame}{Das Problem:}
+\begin{alertblock}{}
+Bis jetzt können wir ungehindert auf alle Attribute eines Objekts zugreifen und sie verändern, was nicht immer so toll ist.
+\end{alertblock}
+
+\pause
+\begin{block}{Mögliche Lösungen:}
+\begin{itemize}
+	\item Es einfach hinnehmen \pause (schlecht)
+	\pause
+	\item den Benutzer freundlich mit einem Kommentar darauf hinweisen, bestimmte Attribute nicht zu ändern
+	\pause (auch nicht wirklich gut...)
+	\pause
+	\item \textbf{Zugriffsmodifikatoren} einsetzen!
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Sichtbarkeiten in Java}
+\begin{block}{Zugriffsmodifikatoren}
+Mit Hilfe von \textbf{Zugriffsmodifikatoren} (access modifiers) lassen sich die \textbf{Sichtbarkeiten} von Programmteilen regeln:
+\begin{itemize}
+	\item \textbf{public} \textit{Element}: Element ist für alle Klassen sichtbar
+	\item \textbf{private} \textit{Element}: Element ist nur innerhalb seiner Klasse sichtbar
+	\pause
+	\item  \textbf{protected} \textit{Element}: Element ist nur innerhalb seiner Klasse, deren Subklassen und allen Klassen im selben Paket sichtbar\\
+	$\rightarrow$später mehr dazu
+	\item \textbf{kein Modifier}: Element ist nur innerhalb seiner Klasse und der Klassen im selben Paket sichtbar\\
+	$\rightarrow$hier nicht so wichtig
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[containsverbatim]{Sichtbarkeiten in Java}
+\begin{lstlisting}
+public class Student {
+	//die Attribute sind nun nach aussen nicht mehr sichtbar
+	private String name;
+	private int semester;
+	private int matriculationNumber;
+
+	public Student(String name, int semester, int matriculationNumber) {
+	//hier wird wie gewohnt alles initialisiert
+	}	
+}
+\end{lstlisting}
+\begin{lstlisting}
+public class Main {
+	public static void main(String[] args) {
+		Student maxMustermann = new Student("Max Mustermann", 3, 1234567);
+		//hier bekommt man nun einen Compilerfehler
+		maxMustermann.matriculationNumber = 4545454;
+		//...
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}{Sichtbarkeiten in Java}
+\setbeamercovered{invisible}
+\begin{center}{\huge Problem gelöst?\\}
+\pause
+{\Huge Nein!}
+\end{center}
+\pause
+\begin{alertblock}{Neues Problem:}
+Jetzt können wir Namen, Semester und Matrikelnummer auch nicht mehr auslesen...
+\end{alertblock}
+\pause
+\begin{block}{Auch hierzu gibt es aber eine Lösung:}
+Mit \textbf{getter-Methoden} kann man den Lesezugriff auf Attribute wieder erlauben.
+\end{block}
+\end{frame}
+
+\begin{frame}[containsverbatim]{getter-Methoden}
+\begin{lstlisting}
+public class Student {
+//...Attribute, Konstruktor usw...
+	
+	//die getter-Methode fuer das Attribut 'name'
+	public String getName() {
+		return this.name;
+	}
+//...weitere getter-Methoden usw...
+}
+\end{lstlisting}
+\begin{lstlisting}
+public class Main {
+	public static void main(String[] args) {
+		Student maxMustermann = new Student("Max Mustermann", 3, 1234567);
+		//liest den Namen und gibt ihn aus
+		System.out.println(maxMustermann.getName());
+		//...
+\end{lstlisting}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Parameter und this-Schlüsselwort}
+\begin{frame}[containsverbatim]
+	\frametitle{Parameter-Bezeichnungen}
+	
+	\emph{Teddy.java}
+	\begin{lstlisting}[language=java]
+public class Teddy {
+	String name;
+	int groesse; //in cm
+
+	public Teddy(String name, int groesse) {
+		name = name;
+		groesse = groesse;
+	}
+}
+	\end{lstlisting}
+
+	\emph{Main.java}
+	\begin{lstlisting}[language=java]
+Teddy myTeddy = new Teddy("Bruno", 30);
+System.out.println(myTeddy.name);
+	\end{lstlisting}
+	
+	Was wird ausgegeben?
+	\pause
+	\textbf{null} - Aber warum? %das ist invisible, siehe design.tex line 67
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{this - Schlüsselwort}
+	
+	\emph{Teddy.java}
+	\begin{lstlisting}
+public class Teddy {
+	String name;
+	int groesse; //in cm
+			
+	public Teddy(String name, int groesse) {
+		this.name = name;
+		this.groesse = groesse;
+	}
+}
+	\end{lstlisting}
+
+	\emph{Main.java}
+	\begin{lstlisting}
+Teddy myTeddy = new Teddy("Bruno", 30);
+System.out.println(myTeddy.name);
+	\end{lstlisting}
+	
+	
+	Jetzt heißt unser Teddy wirklich Bruno :)
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}
+	\frametitle{this - Schlüsselwort}
+	
+	Das \textbf{this}-Schüsselwort verweist auf das Objekt ''in dem'' man sich gerade befindet.
+	
+	$\rightarrow$ Das Objekt kann sich auf sich selbst beziehen.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Kontrollstrukturen}
+\subsection{if-Anweisung}
+\begin{frame}[containsverbatim]
+	\frametitle{If-Anweisung}
+	
+		\emph{Syntax:}
+		\begin{lstlisting}
+if(<Bedingung>) {
+	//Anweisungen fuer '<Bedingung> ist wahr'
+} else {
+	//Anweisungen fuer 'Bedingung ist falsch'
+}
+		\end{lstlisting}
+		\emph{Erinnerung: Bedingungen sind Ausdrücke vom Typ 'boolean'}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[containsverbatim]
+	\frametitle{If-Anweisung}
+	
+		\emph{Syntax:}
+		\begin{lstlisting}
+if(<Bedingung>) {
+	//Anweisungen fuer 'Bedingung ist wahr'
+} else if(<andere Bedingung>) {
+	//Anweisungen fuer 'andere Bedingung ist wahr'
+} else {
+	//Anweisungen fuer 'Bedingung und andere Bedingung sind falsch'
+}
+		\end{lstlisting}
+		\textbf{If-Anweisungen werden sehr oft gebraucht $\rightarrow$ merken!}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Switch-Anweisung}
+\begin{frame}[containsverbatim]
+	\frametitle{Switch-Anweisung}
+	
+		\emph{Syntax:}
+		\begin{lstlisting}
+switch (<Ausdruck>) {
+	case <moeglicher Wert>:
+		//Anweisungen, wenn '<Ausdruck>' == <moeglicher Wert>
+		break;
+	case <anderer moeglicher Wert>
+		//...
+		break;
+	case default:
+		//Anweisungen, wenn <Ausdruck> keinen angegebener Wert angenommen hat.
+}\end{lstlisting}
+		\textbf{Man beachte:}
+		\begin{itemize}
+			\item $<$moeglicher Wert$>$ muss eine Konstante sein
+			\item $<$Ausdruck$>$ muss vom Typ char, byte, short, int oder String sein
+			\item Vergessen von break kann gefährlich werden
+		\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{(do-)while-Schleifen}
+\begin{frame}[containsverbatim]
+	\frametitle{(do-)while-Schleifen }
+	
+	\emph{Syntax:}
+	\begin{lstlisting}
+while (<Bedingung>) {
+	//Anweisungen werden ausgefuehrt, solange <Bedingung> == true;
+}
+		
+//do-while Variante:
+do {
+	//Anweisungen werden ausgefuehrt, solange <Bedingung> == true;
+} while(<Bedingung>);
+	\end{lstlisting}
+	\textbf{Wo ist der Unterschied?} \pause
+	
+	while-Schleifen prüft am Anfang,
+	
+	do-while-Schleife prüft am Ende $\rightarrow$ mindestens eine Ausführung des Rumpfes.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{for-Schleife}
+\begin{frame}[containsverbatim]
+	\frametitle{for-schleife}
+	
+	\emph{Syntax:}
+	\begin{lstlisting}
+for(<Zaehler auf Start setzen>; <Bedingung mit Zaehler>; <Zaehler veraendern>) {
+	//Rumpf wird so lange ausgefuehrt, bis <Bedingung mit Zaehler> falsch wird.
+}
+	\end{lstlisting}
+	
+\end{frame}
+\begin{frame}[containsverbatim]
+	\frametitle{for-schleife}	
+	\emph{Typische Schleife:}
+	\begin{lstlisting}
+for(int i = 0; i <= 10; i++) {
+	//Mach was sinnvolles.
+}
+	\end{lstlisting} \pause
+	
+	\textbf{Frage:} wie oft wird diese Schleife ausgeführt? \pause
+	
+	\textbf{Antwort:} 11 mal.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Aufgaben}
+\subsection{Aufgaben} %Für das Design
+\begin{frame}
+	\frametitle{Aufgabenblatt}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Bonus}
+\subsection{Bonus}
+\begin{frame}[containsverbatim]
+	\frametitle{Überlade von Methoden}
+	
+	\emph{HaushaltsRoboter.java}
+	\begin{lstlisting}
+public void geschirrAbraeumen(Geschirr was, Ort wohin) {
+	//...
+}
+	\end{lstlisting}
+	
+	\emph{Program.java}
+	\begin{lstlisting}
+//...
+HaushaltsRoboter robbi = new HaushaltsRoboter();
+robbi.geschirrAbraeumen(myTelle, mySpuehlmaschiene);
+robbi.geschirrAbraeumen(myTasse, mySpuehlmaschiene);
+robbi.geschirrAbraeumen(myBesteck, mySpuehlmaschiene);
+robbi.geschirrAbraeumen(myTopf, mySpuehlbecken);
+//...
+	\end{lstlisting}
+	
+	
+	\textbf{Problem:} Wir geben bei fast allen Aufrufen der Methode den Parameter \emph{mySpuehlmaschiene} an.
+\end{frame}
+
+\begin{frame}[containsverbatim]
+	\frametitle{Überlade von Methoden}
+	
+	\emph{HaushaltsRoboter.java}
+	\begin{lstlisting}
+public void geschirrAbraeumen(Geschirr was, Ort wohin) {
+	//...
+}
+		
+public void geschirrAbraeumen(Geschirr was) {
+	//..
+}
+	\end{lstlisting}
+	
+	\emph{Program.java}
+	\begin{lstlisting}
+HaushaltsRoboter robbi = new HaushaltsRoboter();
+robbi.geschirrAbraeumen(myTelle);
+robbi.geschirrAbraeumen(myTasse);
+robbi.geschirrAbraeumen(myBesteck);
+robbi.geschirrAbraeumen(myTopf, mySpuehlbecken);
+	\end{lstlisting}
+	
+	
+	$\rightarrow$ \emph{geschirrAbrauemen} ist jetzt überladen.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Überladen von Methoden}
+	
+	So wird's gemacht:
+	\begin{itemize}
+		\item selber Rückgabetyp
+		\item selber Name
+		\item andere Parameter-Liste
+	\end{itemize}
+	
+	
+	Praktisch: Konstruktoren können auch überladen werden.
+\end{frame}
+
+\section{Zusammenfassung}
+\subsection{Zusammenfassung} %Fürs Design
+\begin{frame}
+	\frametitle{Was haben wir heute gemacht?}
+	
+	\begin{itemize}
+		\item \emph{this}-Schlüsselwort
+		\item Ausdrücke / Anweisungen
+		\item If- und Switch-Anweisung
+		\item Drei verschiedene Schleifen
+		\item (Überladen von Methoden)
+	\end{itemize}
+\end{frame}
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}

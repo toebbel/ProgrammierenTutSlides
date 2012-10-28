@@ -1,0 +1,218 @@
+%%% Design basiert auf:
+%% LaTeX-Beamer template for KIT design
+%% by Erik Burger, Christian Hammer
+%% title picture by Klaus Krogmann
+%% version 2.1
+\documentclass[18pt]{beamer}
+
+\usepackage{templates/beamerthemekit}
+\usepackage{graphicx} %because it will be included below
+\usepackage{listings}
+%\usepackage{wasysym}
+\usepackage{color}
+\usepackage[T1]{fontenc}
+%\usepackage{cmap}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
+%\usepackage{pdfpages}
+\definecolor{listinggray}{gray}{0.9}
+\definecolor{lbcolor}{rgb}{0.9,0.9,0.9}
+\lstset{
+        language=Java,
+        backgroundcolor=\color{lbcolor},
+        tabsize=4,
+		keepspaces,
+		extendedchars=true,
+        rulecolor=\color{black},
+        basicstyle=\footnotesize,
+        aboveskip=0pt,
+        upquote=true,
+        columns=fixed,
+        showstringspaces=false,
+        extendedchars=true,
+        breaklines=true,
+        frame=single,
+        showtabs=false,
+        showspaces=false,
+        showstringspaces=false,
+        identifierstyle=\ttfamily,
+        keywordstyle=\color[rgb]{0,0,1},
+        commentstyle=\color[rgb]{0.133,0.545,0.133},
+        stringstyle=\color[rgb]{0.627,0.126,0.941},
+}
+
+
+%% TITLE PICTURE
+\titleimage{frontpic}
+
+
+% For the title page
+\title[Proggen WS11/12]{Programmieren WS 2011/2012}
+\subtitle{Tutorium Nr. 1 / 11}
+\author{Tobias Sturm} %, David Kulicke
+\institute{Zertifizierbare Vertrauenswürdige Informatiksysteme}
+\date[23.1.12] %TODO aktualisieren
+
+% the presentation starts here
+\begin{document}
+\selectlanguage{ngerman}
+
+
+%title page
+\begin{frame}
+	\titlepage
+\end{frame}
+
+
+%table of contents
+\begin{frame}{Heute:}
+%	\setcounter{tocdepth}{1}
+	\tableofcontents
+\end{frame}
+
+\setbeamercovered{invisible}
+
+%Ganzer kram der hier eigentlich steht, ist in main.tex
+
+\section{wichtige Dinge}
+
+%%%%%%%%
+%Slide 0
+\begin{frame}
+	\frametitle{Organisatorisches}
+	Alternatives Tutorium von mir: \emph{Montag, 17:30, SR -118}
+	
+	bzw. \emph{Montag, 8:00, SR -107}
+\end{frame}
+
+%%%%%%%%
+%Slide 1
+\begin{frame}
+	\frametitle{Ansprechpartner Hilfe}
+	\framesubtitle{zu wem rennen, wenn es mal brennt}
+	
+	\textbf{Das Internet}
+	\begin{itemize}
+		\item \href{http://stackoverflow.com/}{stackoverflow.com}
+		\item \href{http://download.oracle.com/javase/7/docs/api/}{Java 7 API}
+	\end{itemize}
+	
+	\pause
+	
+	\textbf{Ansprechpartner}
+	\begin{enumerate}
+		\item Kommilitonen
+		\item das Praktomats-Forum
+		\item Euer Tutor (das bin ich) - \href{mailto:Tobias.Sturm@student.kit.edu}{Tobias.Sturm@student.kit.edu}
+		\item Übungsleiter \href{https://zvi.ipd.kit.edu/21_kelbert.php}{(Dipl.-Inf. Florian Kelbert)} - \href{mailto:florian.kelbert@kit.edu}{florian.kelbert@kit.edu}
+	\end{enumerate}
+\end{frame}
+
+%%%%%%%%
+%Slide 2
+\begin{frame}
+	\frametitle{Zu erledigen!}
+	\framesubtitle{am besten gleich nach dem Tutorium}
+	\begin{itemize}
+		\item Mir eine Email schreiben
+		\item \href{http://vpn.kit.edu}{VPN testen}
+		\item Praktomat registrieren
+		\item Disclaimer ausfüllen
+		\item Vorlesungsseite als Favorit speichern:  \href{https://zvi.ipd.kit.edu/lehre_programmieren_ws11.php}{zvi.ipd.kit.edu/lehre\_programmieren\_ws11.php}
+		\item Java+Editor installieren (gleich mehr!)
+	\end{itemize}
+\end{frame}
+
+
+%%%%%%%%
+%Slide 3
+
+\section{Objekte vs. Klassen}
+\begin{frame}
+	\frametitle{Objekte vs. Klassen}
+
+	\begin{huge}
+		\begin{center}
+			Objekte $ \Leftrightarrow $ Klassen
+		\end{center}
+	\end{huge}
+\end{frame}
+
+%%%%%%%%%%%
+%slide 4
+\begin{frame}
+	\frametitle{Objekte vs. Klassen}
+	\framesubtitle{was ist ein Objekt?}
+	\begin{itemize}
+		\pause
+		\item Identität \uncover<5->{$ \rightarrow  $ Referenz / Name}
+		\pause
+		\item Zustand \uncover<6->{$ \rightarrow  $ Attribute}
+		\pause
+		\item Verhalten \uncover<7->{$ \rightarrow  $ Methoden / Funktionen}
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%
+%slide 5
+\begin{frame}
+	\frametitle{Objekte vs. Klassen}
+	\framesubtitle{was ist eine Klasse?}
+		\pause
+		\emph{Bauplan} für gleichartige Objekte. 
+		\begin{itemize}
+			\item welche Attribute sollen die Objekte haben?
+			\item welche Methoden sollen die Objekte haben?
+		\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%
+%slide 6
+\section{Java}
+\begin{frame}
+	\frametitle{Hands On!}
+	\framesubtitle{Das erste Java-Programm!}
+	
+	Demo
+	
+\end{frame}
+
+%%%%%%%%
+%Slide 7
+\begin{frame}
+	\frametitle{Hands On!}
+	\framesubtitle{Das solltet ihr jetzt können bzw. wissen}
+	
+	\begin{itemize}
+		\item Klasse vs. Objekt
+		\item Klasse in Java schreiben
+	\end{itemize}
+
+	\pause
+	\textbf{Das nächste mal}
+	\begin{itemize}
+		\item Instanzen bzw. Objekte erzeugen
+		\item Methode schreiben
+		\item Programme ausführen
+	\end{itemize}
+\end{frame}
+
+
+%Noch fragen Folie
+\section{Fragen?}
+\subsection*{Fragen} %Für das Design...
+\begin{frame}	
+	\begin{center}
+		\huge{Fragen?}
+	\end{center}
+\end{frame}
+
+
+
+%comic
+\begin{frame}[full]
+\includegraphics[scale=0.55]{bilder/comics/September-25-2011-18-44-59-aa71ce1bd67502c27bc56a6b8d724897.jpeg}
+\end{frame}
+\end{document}
+
+\end{document}
